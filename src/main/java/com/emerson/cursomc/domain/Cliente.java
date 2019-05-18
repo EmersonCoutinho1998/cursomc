@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import com.emerson.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+
+
 @Entity
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
