@@ -1,5 +1,6 @@
 package com.emerson.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.emerson.cursomc.domain.Categoria;
 import com.emerson.cursomc.repositories.CategoriaRepository;
+import com.emerson.cursomc.services.exception.DataIntegrityException;
 import com.emerson.cursomc.services.exception.ObjectNotFoundException;
 
 
@@ -29,6 +31,19 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		try {
+			repo.deleteById(id);
+		}
+		catch(DataIntegrityException e){
+			throw new DataIntegrityException("Não é possível excluir uma categoria que tem produtos");
+		}
+	}
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 
 }
