@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.emerson.cursomc.domain.Categoria;
 
+
 public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
