@@ -6,8 +6,10 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import com.emerson.cursomc.domain.enums.TipoCliente;
 import com.emerson.cursomc.dto.ClienteNewDTO;
 import com.emerson.cursomc.resources.exception.FieldMessage;
+import com.emerson.cursomc.services.validation.util.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
@@ -19,6 +21,13 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
+		
+		if(objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
+		}
+		if(objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
+		}
 		
 		
 		for (FieldMessage e : list) {
