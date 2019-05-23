@@ -58,7 +58,8 @@ public class ClienteService {
 			repo.deleteById(id);
 		}
 		catch(DataIntegrityViolationException e){
-			throw new DataIntegrityException("Não é possível excluir porque há entidades relacionadas");
+			Optional<Cliente> obj = repo.findById(id);
+			throw new DataIntegrityException("Não é possível excluir porque há pedidos relacionados ao cliente "+obj.get().getNome());
 		}
 	}
 	
