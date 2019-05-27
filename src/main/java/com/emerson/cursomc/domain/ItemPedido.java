@@ -77,11 +77,11 @@ public class ItemPedido implements Serializable{
 	}
 	
 	public void setPedido(Pedido pedido) {
-	    this.id.setPedido(pedido);
+	    id.setPedido(pedido);
 	}
 	 
 	public void setProduto(Produto produto) {
-	    this.id.setProduto(produto);
+	   id.setProduto(produto);
 	}
 
 	@Override
